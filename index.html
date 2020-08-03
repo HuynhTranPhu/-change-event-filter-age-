@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envent-change</title>
+</head>
+<body>
+    <span>Age</span>
+    <select id="age-filter">
+        <option >20</option>
+        <option >21</option>
+        <option >22</option>
+    </select>
+    <table id="student-list">
+    </table>
+    <script>
+        var students=[
+            {name:'Phu', age:21},
+            {name:'Phi', age:20},
+            {name:'Trung', age:21},
+            {name:'Thang', age:20},
+            {name:'Huy', age:22}
+        ];
+        var ageFilter = document.getElementById('age-filter');
+        ageFilter.addEventListener('change',ageFilterChange);
+        function ageFilterChange(){
+            var selectAge = parseInt(ageFilter.value);
+            var filterStudent = students.filter(function(student){
+                return student.age === selectAge;
+            });
+            render(filterStudent)
+
+        }
+
+        function render(students){
+            var studentTable = document.getElementById('student-list');
+            var content = students.map(function(student){
+                return '<tr><td>' + student.name + '</td><td>' + student.age + '</td></tr>';
+            });
+            studentTable.innerHTML=content.join('');
+
+        }
+        render(students);
+    </script>
+    
+</body>
+</html>
